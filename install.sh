@@ -25,7 +25,7 @@ pkg upgrade -y 2>&1
 status "[*] installing dependencies"
 pkg install fzf curl wget nano ncurses-utils python jq git make -y 2>&1
 
-[[ -a .mnml_tel ]] || {
+[[ -a ".mnml_tel" ]] || {
     status "[*] installing framework"
     git clone 'https://github.com/Sidd-Dino/mnml_tel.git' .mnml_tel
     cd .mnml_tel || { print "[ERR] could not clone the git repository\n'https://github.com/Sidd-Dino/mnml_tel.git'"; exit 1; }

@@ -14,5 +14,5 @@ align="center">An attempt to make a mnml t-e-l framework</p>
 
 # Installation
 ```
-curl "https://raw.githubusercontent.com/Sidd-Dino/dino_prompt/master/install.sh" | bash
+curl "https://raw.githubusercontent.com/Sidd-Dino/mnml_tel/master/install.sh" | bash
 ```
