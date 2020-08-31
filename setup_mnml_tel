@@ -26,7 +26,7 @@ get_shell() {
 # set motd on end of install
 set_motd() {
     :> ~/../usr/etc/motd
-    printf  "%s\n%s\n%s"\
+    printf  "%s\n%s\n%s\n"\
             "██████  ██████  ██    "\
             "  ██    ████    ██    "\
             "  ██    ██████  ██████" >> ~/../usr/etc/motd
@@ -55,7 +55,7 @@ install_mnml_tel() {
           " 'https://github.com/Sidd-Dino/mnml_tel.git'";
     
     get_shell
-    echo ". ~/.mnml_tel/main" >> "$rc"
+    echo 'export PATH="$PATH:$HOME/.mnml_tel/"' >> "$rc"
 
     set_motd
 }
