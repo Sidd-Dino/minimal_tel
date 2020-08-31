@@ -25,11 +25,14 @@ get_shell() {
 
 upgrade_mnml_tel() {
     status "upgrading mnml_tel"
+
+    # cd into ~/.mnml_tel
     cd "$HOME/.mnml_tel" || error "Where the frick is $HOME/.mnml_tel"
+    
     if git pull --rebase --stat origin master; then
         status "upgraded mnml_tel"
     else
-        error "something's wrong with the upgrade"
+        error "something went wrong with the upgrade"
     fi
 }
 

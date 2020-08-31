@@ -5,11 +5,11 @@ align="center">A minimal tel without the pesky statuses </p>
 
 
 # Requirements
-- Bash
-- Git
+- bash
+- git
 - curl
 
 # Installation
 ```
-curl "https://raw.githubusercontent.com/Sidd-Dino/mnml_tel/master/install_or_upgrade.sh" | bash
+curl "https://raw.githubusercontent.com/Sidd-Dino/mnml_tel/master/setup_mnml_tel.sh" | bash
 ```
