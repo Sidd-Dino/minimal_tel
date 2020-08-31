@@ -15,5 +15,5 @@ align="center">A minimal tel without the pesky statuses </p>
 
 # Installation
 ```
-curl "https://raw.githubusercontent.com/Sidd-Dino/mnml_tel/master/install.sh" | bash
+curl "https://raw.githubusercontent.com/Sidd-Dino/mnml_tel/master/install_or_upgrade.sh" | bash
 ```
