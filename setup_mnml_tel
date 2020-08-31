@@ -23,6 +23,15 @@ get_shell() {
        rc="${HOME}/.profile"
 }
 
+# set motd on end of install
+set_motd() {
+    :> ~/../usr/etc/motd
+    printf  "%s\n%s\n%s"\
+            "██████  ██████  ██    "\
+            "  ██    ████    ██    "\
+            "  ██    ██████  ██████" >> ~/../usr/etc/motd
+}
+
 upgrade_mnml_tel() {
     status "upgrading mnml_tel"
 
@@ -42,11 +51,13 @@ install_mnml_tel() {
     status "installing mnml_tel"
     
     git clone 'https://github.com/Sidd-Dino/mnml_tel.git' .mnml_tel ||\
-    error "could not clone the git repository
-'https://github.com/Sidd-Dino/mnml_tel.git'";
+    error "could not clone the git repository"\
+          " 'https://github.com/Sidd-Dino/mnml_tel.git'";
     
     get_shell
     echo ". ~/.mnml_tel/main" >> "$rc"
+
+    set_motd
 }
 
 main() {
