@@ -35,7 +35,7 @@ cd "$HOME" || error "Couldn't cd into home"
     status "installing mnml_tel"
     git clone 'https://github.com/Sidd-Dino/mnml_tel.git' .mnml_tel
     cd .mnml_tel || error "could not clone the git repository\n'https://github.com/Sidd-Dino/mnml_tel.git'";
-    echo ". .mnml_tel/main" >> ~/.bashrc
+    echo ". ~/.mnml_tel/main" >> ~/.bashrc
 }
 
 cd "$old_pwd" || error "Couldn't cd back to intial directory"
