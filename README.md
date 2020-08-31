@@ -4,13 +4,9 @@ align="center">A minimal tel without the pesky statuses </p>
 </br>
 
 
-# Features
-- Simple 
-- Lightweight (maybe)
-
 # Requirements
 - Bash
-- Git (for the git branch name)
+- Git
 - curl
 
 # Installation
