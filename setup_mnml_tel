@@ -34,7 +34,7 @@ set_motd() {
 }
 
 upgrade_mnml_tel() {
-    status "upgrading mnml_tel"
+    print_install_status "upgrading mnml_tel"
 
     # cd into ~/.mnml_tel
     cd "$HOME/.mnml_tel" || print_error_and_die "Where the frick is $HOME/.mnml_tel"
