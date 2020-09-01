@@ -1,0 +1,10 @@
+#!/usr/bin/env bash
+
+batteryapi=$(termux-battery-status)
+bat_capacity=$(echo "$batteryapi" | jq -r .percentage)
+bat_status=$(echo "$batteryapi" | jq -r .status)
+bat_status="${bat_status:: 1}"
+
+printf  '[ DATE ] %(%a %d %b)T\n' '-1'
+printf  '[ TIME ] %(%H %M)T\n' '-1'
+printf  '[ BATT ] %s %s' "${bat_capacity}" "${bat_status}"
