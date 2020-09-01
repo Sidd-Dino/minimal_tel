@@ -6,16 +6,17 @@ printf '██  ██  ██  ██  ██  ██  ██████  █�
 printf '\e[m'
 
 # status_function
-status() {
+print_install_status() {
     printf -- '\e[38;5;6m[*] %s\e[m\n' "$*"
 }
 
 # error_printing_function
-error() {
+print_error_and_die() {
     printf -- '\e[38;5;9m[ERR] %s\e[m\n' "$*"
     exit 1
 }
 
+# 
 get_shell() {
     rc="${HOME}/.${SHELL##*/}rc"
 
@@ -26,7 +27,7 @@ get_shell() {
 # set motd on end of install
 set_motd() {
     :> ~/../usr/etc/motd
-    printf  "%s\n%s\n%s\n"\
+    printf  "%s\n"\
             "██████  ██████  ██    "\
             "  ██    ████    ██    "\
             "  ██    ██████  ██████" >> ~/../usr/etc/motd
@@ -36,23 +37,23 @@ upgrade_mnml_tel() {
     status "upgrading mnml_tel"
 
     # cd into ~/.mnml_tel
-    cd "$HOME/.mnml_tel" || error "Where the frick is $HOME/.mnml_tel"
+    cd "$HOME/.mnml_tel" || print_error_and_die "Where the frick is $HOME/.mnml_tel"
     
     if git pull --rebase --stat origin master; then
-        status "upgraded mnml_tel"
+        print_install_status "upgraded mnml_tel"
     else
-        error "something went wrong with the upgrade"
+        print_error_and_die "something went wrong with the upgrade"
     fi
 }
 
 install_mnml_tel() {
-    pkg install git
+    pkg install git fzf termux-api
     
-    status "installing mnml_tel"
+    print_install_status "installing mnml_tel"
     
     git clone 'https://github.com/Sidd-Dino/mnml_tel.git' .mnml_tel ||\
-    error "could not clone the git repository"\
-          " 'https://github.com/Sidd-Dino/mnml_tel.git'";
+    print_error_and_die "could not clone the git repository"\
+                         " 'https://github.com/Sidd-Dino/mnml_tel.git'";
     
     get_shell
     echo 'export PATH="$PATH:$HOME/.mnml_tel/"' >> "$rc"
@@ -76,7 +77,7 @@ main() {
         install_mnml_tel
     }
 
-    cd "$old_pwd" || error "Couldn't cd back to intial directory"
+    cd "$old_pwd" || print_error_and_die "Couldn't cd back to intial directory"
 }
 
 main

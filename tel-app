@@ -39,7 +39,7 @@ done
 
 shift $((OPTIND-1))
 
-pattern=$1
+pattern=$*
 
 if $update;then
     update_cache

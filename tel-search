@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 # search command for TEL
-# sealyj
+# Mad by : sealyj
 # todo: extract bg and fg color from ~/.termux.color... and add in ddg url
 RED='\033[0;31m'
 NC='\033[0m' # No Col
