@@ -1,0 +1,25 @@
+|\/|       
+|  |inimal TEL  
+
+> TEL
+----------------------------------------------------------------------------------------
+https://github.com/t-e-l/tel 
+
+
+> DEPENDENCIES
+----------------------------------------------------------------------------------------
+- git
+- curl
+- fzf 
+
+
+> INSTALLATION
+---------------------------------------------------------------------------------------- 
+curl "https://raw.githubusercontent.com/Sidd-Dino/mnml_tel/master/setup_mnml_tel" | bash
+
+
+> Blah
+Roses are red
+Violets are blue
+This is the end
+See you soon
