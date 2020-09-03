@@ -1,24 +1,34 @@
 #!/usr/bin/env bash
+#
+# TEL app launcher
+#_______________________________________________________________________
+
+# Usage
+# app [OPTIONS] [PATTERN]
+# app -h
+# app -u
+# app Fdroid
+# app Chro     > Laucnhes Chrome
+# app Ytube    > Laucnhes Youtube
 
 print_ERR_and_die(){
+    # Error printing function
     printf "\e[38;5;1m[!]%s\n\e[m"\
-           "$*"
+           "$*" 1>&2
     exit 1
 }
 
 show_help(){
-    printf  -- '%s\n'\
-            "app"\
-            "Launch Android Apps from Termux\n"\
-            ""\
-            "Usage"\
-            "  $name  [OPTION] [PATTERN]"\
-            "Options:"\
-            "  -u   update app cache"\
-            "  -h   display this help message"
+    printf  "%s\n"\
+            "app [OPTIONS] [PATTERN]"\
+            "__________________________"\
+            "OPTIONS"\
+            "  -h   display this help message"\
+            "  -u   update app cache"
 }
 
 update_cache(){
+    # Android Black Magic
     am broadcast --user 0 \
          --es com.termux.app.reload_style apps-cache \
          -a com.termux.app.reload_style com.termux > /dev/null
@@ -26,37 +36,50 @@ update_cache(){
 
 main(){
     cachefile="$HOME/.apps"
-    namefile="$HOME/.app_names"
+    app_namefile="$HOME/.app_names"
     
     case "$1" in
+        # Update the app list
+        # Incase a new app has been installed
         -u)
             update_cache
             exit 0
         ;;
 
+        # Display the help message
         -h)
             show_help
             exit 0
         ;;
     esac
 
-    pattern=$*
-
     [[ ! -a "$cachefile" || ! -s "$cachefile" ]] &&\
        print_ERR_and_die "App cache is empty."\
                          "Run \`app -u\`"
-        
-    if [ -z "$pattern" ];then
-        app_name=$( fzf < "$namefile" | cut -d "|" -f1)
-    else
-        app_name=$( fzf -f "$pattern" < "$namefile" |head -n 1 | cut -d "|" -f1)
-    fi
+    
+    
+    # fuzzy search in $app_namefile to get the app code and app 
+    # name in this format 
+    # app_code | app_name
+    app_data=$( fzf -e --layout=reverse --cycle\
+                --info=inline --prompt="  Laucnh app: "\
+                --query="$*" --select-1 -0 < "$app_namefile")
 
-    [[ -z "$app_name" ]] && print_ERR_and_die "Couldnt get app"
 
-    activity=$( grep "$app_name" "$cachefile" | cut -d "|" -f2 )
-    echo "[*]launching $activity"
+    # get the app code
+    app_code=$( echo "$app_data" | cut -d "|" -f1) 
+    # get the app name
+    app_name=$( echo "$app_data" | cut -d "|" -f2) 
+    
+    # No app name recieved
+    [[ -z "$app_code" ]] && print_ERR_and_die "Couldnt get app"
 
+    # get the activity name
+    activity=$( grep "$app_code" "$cachefile" | cut -d "|" -f2 )
+    printf  "\e[38;5;2m[*]launching\e[m %s\n"\
+            "$app_name"
+
+    # Laucnh the app
     am start -n "$activity" --user 0 > /dev/null 2>&1
 
 }
