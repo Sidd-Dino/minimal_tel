@@ -12,11 +12,12 @@ Without the the pesky statuses.
 - git
 - curl
 - fzf 
-
+- jq
+- termux-api
 
 > INSTALLATION
 ---------------------------------------------------------------------------------------- 
-curl "https://raw.githubusercontent.com/Sidd-Dino/mnml_tel/master/setup_mnml_tel" | bash
+curl "https://raw.githubusercontent.com/Sidd-Dino/mnml_tel/master/setup_minimal_tel" | bash
 
 
 > Blah

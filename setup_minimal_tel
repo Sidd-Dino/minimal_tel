@@ -34,16 +34,16 @@ set_motd() {
 }
 
 upgrade_mnml_tel() {
-    print_install_status "upgrading mnml_tel"
+    print_install_status "upgrading minimal_tel"
 
     # cd into ~/.mnml_tel
     cd "$HOME/.mnml_tel" || print_error_and_die "Where the frick is $HOME/.mnml_tel"
     
-    if git pull --rebase --stat origin master; then
-        print_install_status "upgraded mnml_tel"
-    else
+    ( git pull --rebase --stat origin master ) || {
         print_error_and_die "something went wrong with the upgrade"
-    fi
+    }
+    
+    print_install_status "upgraded minimal_tel"
 }
 
 install_mnml_tel() {
@@ -53,11 +53,11 @@ install_mnml_tel() {
     
     git clone 'https://github.com/Sidd-Dino/mnml_tel.git' .mnml_tel ||\
     print_error_and_die "could not clone the git repository"\
-                         " 'https://github.com/Sidd-Dino/mnml_tel.git'";
+                        " 'https://github.com/Sidd-Dino/mnml_tel.git'";
     
     get_shell
     echo 'export PATH="$PATH:$HOME/.mnml_tel/"' >> "$rc"
-    echo '. ~/.mnml_tel/aliases'
+    echo '. ~/.mnml_tel/aliases' >> "$rc"
 
     set_motd
 }
@@ -66,19 +66,17 @@ main() {
     # Preserve path
     old_pwd="$PWD"
 
-    cd "$HOME" || error "Couldn't cd into home"
+    cd "$HOME" ||\
+        print_error_and_die "Couldn't cd into home"
 
     # If .mnml_tel already exists upgrade mnml_tel
-    [[ -d "$HOME/.mnml_tel" ]] && {
-        upgrade_mnml_tel    
-    }
+    [[ -d "$HOME/.mnml_tel" ]] && upgrade_mnml_tel
 
     # If .mnml_tel doesn't exist install mnml_tel
-    [[ ! -a "$HOME/.mnml_tel" ]] && {
-        install_mnml_tel
-    }
+    [[ -a "$HOME/.mnml_tel" ]] || install_mnml_tel
 
-    cd "$old_pwd" || print_error_and_die "Couldn't cd back to intial directory"
+    cd "$old_pwd" ||\
+        print_error_and_die "Couldn't cd back to intial directory"
 }
 
 main
