@@ -33,10 +33,10 @@ update_contacts() {
 
     # move termux-contact-list output to 
     # file descriptor 9
-    exec 9<>termux-contact-list
+    termux-contact-list >9
     sleep 2
 
-    while IFS=$'\n' read -sru 9 line; do
+    while IFS=$'\n' read -sr line; do
         [[ ${line} == "  {" ]] && {
             read -r line
             name=${line:9:-2}
@@ -45,7 +45,7 @@ update_contacts() {
             echo "$name | $number" >> "$contactsfile"
         }
     done
-}
+} < 9
 
 main() {
 
