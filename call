@@ -44,8 +44,8 @@ update_contacts() {
             number=${line:11:-1}
             echo "$name | $number" >> "$contactsfile"
         }
-    done
-} < 9
+    done < 9
+}
 
 main() {
 
