@@ -6,5 +6,5 @@ bat_status=$(echo "$batteryapi" | jq -r .status)
 bat_status="${bat_status:: 1}"
 
 printf  '[ DATE ] %(%a %d %b)T\n' '-1'
-printf  '[ TIME ] %(%H %M)T\n' '-1'
-printf  '[ BATT ] %s %s' "${bat_capacity}" "${bat_status}"
+printf  '[ TIME ] %(%H:%M)T\n' '-1'
+printf  '[ BATT ] %s %s\n' "${bat_capacity}" "${bat_status}"

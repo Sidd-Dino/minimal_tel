@@ -57,6 +57,7 @@ install_mnml_tel() {
     
     get_shell
     echo 'export PATH="$PATH:$HOME/.mnml_tel/"' >> "$rc"
+    echo '. ~/.mnml_tel/aliases'
 
     set_motd
 }
