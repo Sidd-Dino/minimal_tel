@@ -83,8 +83,7 @@ main() {
 
     #kills the program if termux-telephony-call command is not available
     ( command -v termux-telephony-call >/dev/null 2>&1 ) || { 
-         print_ERR_and_die "termux-telephony-call not available"
-        exit 1
+        print_ERR_and_die "termux-telephony-call not available"
     }
 
     # Call the person
