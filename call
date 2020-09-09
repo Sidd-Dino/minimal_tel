@@ -10,6 +10,9 @@
 # call blah
 # call 2121821218
 
+# location of the contacts folder
+contactsfile="$HOME/.contacts";
+
 
 print_ERR_and_die() {
     # Error printing function
@@ -29,12 +32,14 @@ show_help() {
 }
 
 update_contacts() {
+    # Empty contacts file
     :> "$contactsfile"
-
     # move termux-contact-list output to 
     # file descriptor 9
-    termux-contact-list >9
-    sleep 2
+    exec 9<>termux-contact-list
+
+    # delay for 2 seconds
+    read -rt "2" <> <(:) || :
 
     while IFS=$'\n' read -sr line; do
         [[ ${line} == "  {" ]] && {
@@ -44,13 +49,12 @@ update_contacts() {
             number=${line:11:-1}
             echo "$name | $number" >> "$contactsfile"
         }
-    done < 9
+    done <9
+
+    
 }
 
 main() {
-
-    # location of the contacts folder
-    contactsfile="$HOME/.contacts";
     
     # display_help
     [[ "$1" == "-h" ]] && {
