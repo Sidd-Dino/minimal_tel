@@ -52,7 +52,7 @@ update_contacts() {
         }
     done <~/.temp
 
-    
+    rm ~/.temp
 }
 
 main() {

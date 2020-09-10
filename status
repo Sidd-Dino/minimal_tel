@@ -1,10 +1,8 @@
 #!/usr/bin/env bash
 
-oldifs=$IFS
-IFS=$'\n'
-battery_info=( "$(termux-battery-status)" )
+termux-battery-status > ~/.temp
 
-for line in "${battery_info[@]}"; do
+while IFS=$'\n' read -rs line; do
     [[ "$line" == *"percentage"* ]] &&{
         bat_capacity="${line//*percentage\": /}"
         bat_capacity="${bat_capacity:: -1}"
@@ -16,8 +14,8 @@ for line in "${battery_info[@]}"; do
     }
 done
 
-IFS=$oldifs
-
 printf  '[ DATE ] %(%a %d %b)T\n' '-1'
 printf  '[ TIME ] %(%H:%M)T\n' '-1'
 printf  '[ BATT ] %s %s\n' "$bat_capacity" "$bat_status"
+
+rm ~/.temp
