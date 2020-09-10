@@ -11,8 +11,7 @@ Without the the pesky statuses.
 ---------------------------------------------------------------------------------------------------
 - git
 - curl
-- fzf 
-- jq
+- fzf
 - termux-api
 
 > INSTALLATION
