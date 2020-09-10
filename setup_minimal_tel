@@ -37,7 +37,7 @@ upgrade_mnml_tel() {
     print_install_status "upgrading minimal_tel"
 
     # cd into ~/.mnml_tel
-    cd "$HOME/.mnml_tel" || print_error_and_die "Where the frick is $HOME/.mnml_tel"
+    cd "$HOME/.minimal_tel" || print_error_and_die "Where the frick is $HOME/.minimal_tel"
     
     ( git pull --rebase --stat origin master ) || {
         print_error_and_die "something went wrong with the upgrade"

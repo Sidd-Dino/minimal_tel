@@ -1,12 +1,8 @@
 #!/usr/bin/env bash
 
-exec 9<> termux-battery-status
-while IFS=$'\n' read -r line; do
-    [[ $line == *"percentage"* ]] && bat_capacity="${line//*percentage\": /}"
-    [[ $line == *"status"* ]] && bat_status="${line//*status\": \"/}"
-done <9
-
-bat_capacity="${bat_capacity:: -1}"
+batteryapi=$(termux-battery-status)
+bat_capacity=$(echo "$batteryapi" | jq -r .percentage)
+bat_status=$(echo "$batteryapi" | jq -r .status)
 bat_status="${bat_status:: 1}"
 
 printf  '[ DATE ] %(%a %d %b)T\n' '-1'
