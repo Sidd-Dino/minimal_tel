@@ -9,10 +9,10 @@ while IFS=$'\n' read -rs line; do
     }
 
     [[ "$line" == *"status"* ]] &&{
-        bat_status="${line//*status\": /\"}"
+        bat_status="${line//*status\": \"/}"
         bat_status="${bat_status::1}"
     }
-done
+done < ~/.temp
 
 printf  '[ DATE ] %(%a %d %b)T\n' '-1'
 printf  '[ TIME ] %(%H:%M)T\n' '-1'
