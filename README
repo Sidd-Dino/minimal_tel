@@ -12,6 +12,7 @@ Without the the pesky statuses.
 - git
 - curl
 - fzf
+- jq
 - termux-api
 
 > INSTALLATION
