@@ -81,7 +81,7 @@ main() {
 
         # If Ctrl+C is used 
         "130")
-            return 0
+            return 1
         ;;
     esac
 
