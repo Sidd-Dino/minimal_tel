@@ -73,10 +73,17 @@ main() {
     contact=$(fzf -e --layout=reverse --cycle --color=16 \
             --info=inline --prompt="  Call: " --query="$*" \
             --select-1 -0 < "$contactsfile")
+    case "$?" in
+        # No contact found
+        "1"  )
+            print_ERR_and_die "couldn't find the contact"
+        ;;
 
-    # No contact found
-    [[ -z "$contact" ]] &&\
-         print_ERR_and_die "couldn't find the contact"
+        # If Ctrl+C is used 
+        "130")
+            return 0
+        ;;
+    esac
 
     # get the contact's name
     contact_name=$(  echo "$contact"  | cut -d "|" -f1) 
