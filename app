@@ -65,14 +65,22 @@ main(){
                 --info=inline --prompt="  Laucnh app: "\
                 --query="$*" --select-1 -0 < "$app_namefile")
 
+    case "$?" in
+        # No app found
+        "1"  )
+            print_ERR_and_die "couldn't find the app"
+        ;;
+
+        # Exited fzf manually
+        "130")
+            return 1
+        ;;
+    esac
 
     # get the app code
     app_code=$( echo "$app_data" | cut -d "|" -f1) 
     # get the app name
     app_name=$( echo "$app_data" | cut -d "|" -f2) 
-    
-    # No app name recieved
-    [[ -z "$app_code" ]] && print_ERR_and_die "Couldnt get app"
 
     # get the activity name
     activity=$( grep "$app_code" "$cachefile" | cut -d "|" -f2 )
