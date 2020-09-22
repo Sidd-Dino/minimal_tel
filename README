@@ -1,27 +1,13 @@
-|\/|       
-|  |inimal TEL
+___
+ |
+ | EL Binaries
 
 > what is this ?
 ---------------------------------------------------------------------------------------------------
-This is a minimal setup for the app TEL( https://github.com/t-e-l/tel )
-Without the the pesky statuses.
+This is a repo containing scripts for TEL( https://github.com/t-e-l/tel )
 
 
 > dependencies
 ---------------------------------------------------------------------------------------------------
-- git
-- curl
 - fzf
 - termux-api
-
-> installation
----------------------------------------------------------------------------------------------------
-curl "https://raw.githubusercontent.com/Sidd-Dino/minimal_tel/master/setup_minimal_tel" | bash
-
-
-> blah
----------------------------------------------------------------------------------------------------
-Roses are red
-Violets are blue
-This is the end
-See you soon
