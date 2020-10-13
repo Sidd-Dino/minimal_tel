@@ -34,10 +34,6 @@ show_help() {
 update_contacts() {
     # Empty contacts file
     :> "$contactsfile"
-    :> ~/.temp
-    # move termux-contact-list output to 
-    # file descriptor 9
-    termux-contact-list > ~/.temp
 
     # delay for 2 seconds
     read -rt "2" <> <(:) || :
@@ -50,9 +46,8 @@ update_contacts() {
             number=${line:11:-1}
             echo "$name | $number" >> "$contactsfile"
         }
-    done <~/.temp
+    done < <$(termux-contact-list)
 
-    rm ~/.temp
 }
 
 main() {
