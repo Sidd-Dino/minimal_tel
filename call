@@ -46,7 +46,7 @@ update_contacts() {
             number=${line:11:-1}
             echo "$name | $number" >> "$contactsfile"
         }
-    done < <$(termux-contact-list)
+    done < <(termux-contact-list)
 
 }
 
